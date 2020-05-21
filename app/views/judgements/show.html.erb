@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>File number:</strong>
+  <%= @judgement.file_number %>
+</p>
+
+<p>
+  <strong>Claimant:</strong>
+  <%= @judgement.claimant %>
+</p>
+
+<p>
+  <strong>Defendant:</strong>
+  <%= @judgement.defendant %>
+</p>
+
+<p>
+  <strong>Summary:</strong>
+  <%= @judgement.summary %>
+</p>
+
+<p>
+  <strong>Court table:</strong>
+  <%= @judgement.court_table %>
+</p>
+
+<p>
+  <strong>Notifications:</strong>
+  <%= @judgement.notifications_id %>
+</p>
+
+<%= link_to 'Edit', edit_judgement_path(@judgement) %> |
+<%= link_to 'Back', judgements_path %>

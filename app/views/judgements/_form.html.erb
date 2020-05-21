@@ -1,0 +1,47 @@
+<%= form_with(model: judgement, local: true) do |form| %>
+  <% if judgement.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(judgement.errors.count, "error") %> prohibited this judgement from being saved:</h2>
+
+      <ul>
+        <% judgement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :file_number %>
+    <%= form.text_field :file_number %>
+  </div>
+
+  <div class="field">
+    <%= form.label :claimant %>
+    <%= form.text_field :claimant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :defendant %>
+    <%= form.text_field :defendant %>
+  </div>
+
+  <div class="field">
+    <%= form.label :summary %>
+    <%= form.text_area :summary %>
+  </div>
+
+  <div class="field">
+    <%= form.label :court_table %>
+    <%= form.text_field :court_table %>
+  </div>
+
+  <div class="field">
+    <%= form.label :notifications_id %>
+    <%= form.text_field :notifications_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Judgements</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>File number</th>
+      <th>Claimant</th>
+      <th>Defendant</th>
+      <th>Summary</th>
+      <th>Court table</th>
+      <th>Notifications</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @judgements.each do |judgement| %>
+      <tr>
+        <td><%= judgement.file_number %></td>
+        <td><%= judgement.claimant %></td>
+        <td><%= judgement.defendant %></td>
+        <td><%= judgement.summary %></td>
+        <td><%= judgement.court_table %></td>
+        <td><%= judgement.notifications_id %></td>
+        <td><%= link_to 'Show', judgement %></td>
+        <td><%= link_to 'Edit', edit_judgement_path(judgement) %></td>
+        <td><%= link_to 'Destroy', judgement, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Judgement', new_judgement_path %>
