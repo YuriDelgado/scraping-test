@@ -14,21 +14,8 @@ RSpec.describe JudgementsController, type: :routing do
       expect(get: "/judgements/1").to route_to("judgements#show", id: "1")
     end
 
-    it "routes to #edit" do
-      expect(get: "/judgements/1/edit").to route_to("judgements#edit", id: "1")
-    end
-
-
     it "routes to #create" do
       expect(post: "/judgements").to route_to("judgements#create")
-    end
-
-    it "routes to #update via PUT" do
-      expect(put: "/judgements/1").to route_to("judgements#update", id: "1")
-    end
-
-    it "routes to #update via PATCH" do
-      expect(patch: "/judgements/1").to route_to("judgements#update", id: "1")
     end
 
     it "routes to #destroy" do

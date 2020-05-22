@@ -1,5 +1,5 @@
 class JudgementsController < ApplicationController
-  before_action :set_judgement, only: [:show, :edit, :update, :destroy]
+  before_action :set_judgement, only: [:show, :destroy]
 
   # GET /judgements
   # GET /judgements.json
@@ -17,14 +17,10 @@ class JudgementsController < ApplicationController
     @judgement = Judgement.new
   end
 
-  # GET /judgements/1/edit
-  def edit
-  end
-
   # POST /judgements
   # POST /judgements.json
   def create
-    @judgement = PjvScrapingService.call(judgement_url_params)
+    @judgement = PjvScrapingService.call(judgement_params)
 
     respond_to do |format|
       message = 'Judgement was successfully created.'
@@ -34,21 +30,6 @@ class JudgementsController < ApplicationController
         format.json { render :show, status: :created, location: @judgement }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @judgement.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /judgements/1
-  # PATCH/PUT /judgements/1.json
-  def update
-    respond_to do |format|
-
-      if @judgement.update(judgement_params)
-        format.html { redirect_to @judgement, notice: 'Judgement was successfully updated.' }
-        format.json { render :show, status: :ok, location: @judgement }
-      else
-        format.html { render :edit }
         format.json { render json: @judgement.errors, status: :unprocessable_entity }
       end
     end
@@ -65,18 +46,11 @@ class JudgementsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_judgement
       @judgement = Judgement.find(params[:id])
     end
 
-    def judgement_url_params
-      params.require(:judgement).permit(:url)
-    end
-
-    # Only allow a list of trusted parameters through.
-
     def judgement_params
-      params.require(:judgement).permit(:file_number, :claimant, :defendant, :summary, :court_table, :notifications_id)
+      params.require(:judgement).permit(:url)
     end
 end
