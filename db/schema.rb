@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_05_21_174708) do
+ActiveRecord::Schema.define(version: 2020_05_22_035026) do
 
   create_table "judgements", force: :cascade do |t|
     t.string "file_number"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 2020_05_21_174708) do
     t.string "court"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["file_number"], name: "index_judgements_on_file_number", unique: true
   end
 
   create_table "notifications", force: :cascade do |t|

@@ -27,8 +27,10 @@ class JudgementsController < ApplicationController
     @judgement = PjvScrapingService.call(judgement_url_params[:judgement_url])
 
     respond_to do |format|
+      message = 'Judgement was successfully created.'
+      message = 'Judgement was successfully updated.' if @judgement.persisted?
       if @judgement.save
-        format.html { redirect_to @judgement, notice: 'Judgement was successfully created.' }
+        format.html { redirect_to @judgement, notice: message }
         format.json { render :show, status: :created, location: @judgement }
       else
         format.html { render :new }
