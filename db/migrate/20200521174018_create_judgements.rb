@@ -1,7 +1,7 @@
 class CreateJudgements < ActiveRecord::Migration[6.0]
   def change
     create_table :judgements do |t|
-      t.string :file_number
+      t.string :file_number, null: false
       t.string :claimant
       t.string :defendant
       t.text :summary

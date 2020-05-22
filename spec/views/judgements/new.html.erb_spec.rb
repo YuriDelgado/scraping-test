@@ -7,8 +7,7 @@ RSpec.describe "judgements/new", type: :view do
       claimant: "MyString",
       defendant: "MyString",
       summary: "MyText",
-      court_table: "MyString",
-      notifications: nil
+      court: "MyString",
     ))
   end
 
@@ -16,18 +15,7 @@ RSpec.describe "judgements/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", judgements_path, "post" do
-
-      assert_select "input[name=?]", "judgement[file_number]"
-
-      assert_select "input[name=?]", "judgement[claimant]"
-
-      assert_select "input[name=?]", "judgement[defendant]"
-
-      assert_select "textarea[name=?]", "judgement[summary]"
-
-      assert_select "input[name=?]", "judgement[court_table]"
-
-      assert_select "input[name=?]", "judgement[notifications_id]"
+      assert_select "input[name=?]", "judgement[url]"
     end
   end
 end

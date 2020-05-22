@@ -1,11 +1,10 @@
-class PjvScrapingService < ApplicationService
-  attr_reader :url, :judgement, :html, :body, :file_number
-  
-  def initialize url
-    @url = url
+require 'open-uri'
 
-    @html = Nokogiri::HTML(open(@url))
-    @body = html.css('div.block-flat')[0]
+class PjvScrapingService < ApplicationService
+  attr_reader :params, :judgement
+  
+  def initialize params
+    @params = params
   end
 
   def call
@@ -18,21 +17,27 @@ class PjvScrapingService < ApplicationService
   private
 
   def judgement_init
-    @file_number = get_file_number_from_header
-    Judgement.find_or_initialize_by(file_number: @file_number)
+    raw_data = open(params[:url])
+    html = Nokogiri::HTML(raw_data)
+    @body = html.css('div.block-flat')[0]
   end
 
   def set_judgement_info
+    @file_number = get_file_number_from_header
+    @judgement = Judgement.find_or_initialize_by(file_number: @file_number)
+
     content = @body.css('div.content')
-    data_raw = content[0].to_s
-    data = data_raw.split("<br>")
-    @judgement = judgement_init
+    str_info = content[0].to_s
+    data = str_info.split("<br>")
     @judgement.court = sanitize(data[0])
+
     data[1].slice!("Actor: ")
-    @judgement.claimant = sanitize(data[1])
+    @judgement.claimant = sanitize(data[1], )
+
     data[2].slice!("Demandado: ")
     @judgement.defendant = sanitize(data[2])
-    @judgement.summary = sanitize(sumary(content[1]))
+
+    @judgement.summary = sumary(content[1])
   end
 
   def set_judgement_notifications
@@ -53,7 +58,7 @@ class PjvScrapingService < ApplicationService
   def sumary content
     content_res = content.text
     content_res.slice!("RESUMEN: ")
-    content_res
+    content_res.strip
   end
 
   def sanitize str

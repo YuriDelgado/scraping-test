@@ -24,7 +24,7 @@ class JudgementsController < ApplicationController
   # POST /judgements
   # POST /judgements.json
   def create
-    @judgement = PjvScrapingService.call(judgement_url_params[:judgement_url])
+    @judgement = PjvScrapingService.call(judgement_url_params)
 
     respond_to do |format|
       message = 'Judgement was successfully created.'
@@ -33,7 +33,7 @@ class JudgementsController < ApplicationController
         format.html { redirect_to @judgement, notice: message }
         format.json { render :show, status: :created, location: @judgement }
       else
-        format.html { render :new }
+        format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @judgement.errors, status: :unprocessable_entity }
       end
     end
@@ -71,10 +71,11 @@ class JudgementsController < ApplicationController
     end
 
     def judgement_url_params
-      params.require(:judgement).permit(:judgement_url)
+      params.require(:judgement).permit(:url)
     end
 
     # Only allow a list of trusted parameters through.
+
     def judgement_params
       params.require(:judgement).permit(:file_number, :claimant, :defendant, :summary, :court_table, :notifications_id)
     end

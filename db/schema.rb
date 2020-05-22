@@ -13,7 +13,7 @@
 ActiveRecord::Schema.define(version: 2020_05_22_035026) do
 
   create_table "judgements", force: :cascade do |t|
-    t.string "file_number"
+    t.string "file_number", null: false
     t.string "claimant"
     t.string "defendant"
     t.text "summary"

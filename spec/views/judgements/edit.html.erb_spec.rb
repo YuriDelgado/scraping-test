@@ -7,9 +7,8 @@ RSpec.describe "judgements/edit", type: :view do
       claimant: "MyString",
       defendant: "MyString",
       summary: "MyText",
-      court_table: "MyString",
-      notifications: nil
-    ))
+      court: "MyString",
+      ))
   end
 
   it "renders the edit judgement form" do
@@ -25,9 +24,7 @@ RSpec.describe "judgements/edit", type: :view do
 
       assert_select "textarea[name=?]", "judgement[summary]"
 
-      assert_select "input[name=?]", "judgement[court_table]"
-
-      assert_select "input[name=?]", "judgement[notifications_id]"
+      assert_select "input[name=?]", "judgement[court]"
     end
   end
 end

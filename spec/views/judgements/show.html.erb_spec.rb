@@ -7,8 +7,7 @@ RSpec.describe "judgements/show", type: :view do
       claimant: "Claimant",
       defendant: "Defendant",
       summary: "MyText",
-      court_table: "Court Table",
-      notifications: nil
+      court: "Court Table",
     ))
   end
 
@@ -18,7 +17,6 @@ RSpec.describe "judgements/show", type: :view do
     expect(rendered).to match(/Claimant/)
     expect(rendered).to match(/Defendant/)
     expect(rendered).to match(/MyText/)
-    expect(rendered).to match(/Court Table/)
-    expect(rendered).to match(//)
+    expect(rendered).to match(/Court/)
   end
 end
