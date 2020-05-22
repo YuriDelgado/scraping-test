@@ -24,7 +24,7 @@ class JudgementsController < ApplicationController
   # POST /judgements
   # POST /judgements.json
   def create
-    @judgement = Judgement.new(judgement_params)
+    @judgement = PjvScrapingService.call(judgement_url_params[:judgement_url])
 
     respond_to do |format|
       if @judgement.save
@@ -41,6 +41,7 @@ class JudgementsController < ApplicationController
   # PATCH/PUT /judgements/1.json
   def update
     respond_to do |format|
+
       if @judgement.update(judgement_params)
         format.html { redirect_to @judgement, notice: 'Judgement was successfully updated.' }
         format.json { render :show, status: :ok, location: @judgement }
@@ -65,6 +66,10 @@ class JudgementsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_judgement
       @judgement = Judgement.find(params[:id])
+    end
+
+    def judgement_url_params
+      params.require(:judgement).permit(:judgement_url)
     end
 
     # Only allow a list of trusted parameters through.

@@ -22,8 +22,7 @@
         <td><%= judgement.claimant %></td>
         <td><%= judgement.defendant %></td>
         <td><%= judgement.summary %></td>
-        <td><%= judgement.court_table %></td>
-        <td><%= judgement.notifications_id %></td>
+        <td><%= judgement.court %></td>
         <td><%= link_to 'Show', judgement %></td>
         <td><%= link_to 'Edit', edit_judgement_path(judgement) %></td>
         <td><%= link_to 'Destroy', judgement, method: :delete, data: { confirm: 'Are you sure?' } %></td>

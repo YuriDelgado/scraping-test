@@ -17,14 +17,13 @@ ActiveRecord::Schema.define(version: 2020_05_21_174708) do
     t.string "claimant"
     t.string "defendant"
     t.text "summary"
-    t.string "court_table"
-    t.integer "notifications_id", null: false
+    t.string "court"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["notifications_id"], name: "index_judgements_on_notifications_id"
   end
 
   create_table "notifications", force: :cascade do |t|
+    t.string "title"
     t.text "body"
     t.integer "judgement_id", null: false
     t.datetime "created_at", precision: 6, null: false
@@ -32,6 +31,5 @@ ActiveRecord::Schema.define(version: 2020_05_21_174708) do
     t.index ["judgement_id"], name: "index_notifications_on_judgement_id"
   end
 
-  add_foreign_key "judgements", "notifications", column: "notifications_id"
   add_foreign_key "notifications", "judgements"
 end

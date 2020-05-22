@@ -6,6 +6,11 @@
 </p>
 
 <p>
+  <strong>Court:</strong>
+  <%= @judgement.court %>
+</p>
+
+<p>
   <strong>Claimant:</strong>
   <%= @judgement.claimant %>
 </p>
@@ -18,16 +23,6 @@
 <p>
   <strong>Summary:</strong>
   <%= @judgement.summary %>
-</p>
-
-<p>
-  <strong>Court table:</strong>
-  <%= @judgement.court_table %>
-</p>
-
-<p>
-  <strong>Notifications:</strong>
-  <%= @judgement.notifications_id %>
 </p>
 
 <%= link_to 'Edit', edit_judgement_path(@judgement) %> |

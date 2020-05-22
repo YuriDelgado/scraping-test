@@ -5,8 +5,7 @@ class CreateJudgements < ActiveRecord::Migration[6.0]
       t.string :claimant
       t.string :defendant
       t.text :summary
-      t.string :court_table
-      t.references :notifications, null: false, foreign_key: true
+      t.string :court
 
       t.timestamps
     end
